@@ -1,0 +1,60 @@
+﻿@model Cursos.Models.Entidades.PostagemBlog
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PostagemBlog</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.tituloPost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.tituloPost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.imagemCapa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.imagemCapa)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.conteudo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.conteudo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.gostei)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.gostei)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.naoGostei)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.naoGostei)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataPublicacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataPublicacao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.autor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.autor)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
