@@ -117,6 +117,7 @@ namespace Cursos.Controllers
             return View(postagemBlog);
         }
 
+    
         // GET: PostagensBlog/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -144,6 +145,30 @@ namespace Cursos.Controllers
             _context.PostagemBlogs.Remove(postagemBlog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        [HttpPost, ActionName("Like")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Like(int id)
+        {
+            var postagemBlog = await _context.PostagemBlogs.FindAsync(id);
+            postagemBlog.gostei += 1;
+            
+            _context.PostagemBlogs.Update(postagemBlog);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Details), new {@id = id});
+        }
+
+
+        [HttpPost, ActionName("Dislike")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Dislike(int id)
+        {
+            var postagemBlog = await _context.PostagemBlogs.FindAsync(id);
+            postagemBlog.naoGostei += 1;
+
+            _context.PostagemBlogs.Update(postagemBlog);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Details), new { @id = id });
         }
 
         private bool PostagemBlogExists(int id)
