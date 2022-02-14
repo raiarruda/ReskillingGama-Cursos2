@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Cursos.Models.Entidades.Professor>
+
+@{
+    ViewData["Title"] = "Professores";
+}
+
+<h1>PROFESSORES</h1>
+
+@foreach(var item in Model)
+{
+    <h2>@item.nome</h2>
+}

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Cursos.Models.Entidades.Curso>
+
+@{
+    ViewData["Title"] = "Cursos";
+}
+
+<h1>CURSOS</h1>
+
+
+@foreach(var item in Model)
+{
+    <div class="col-sm-6">
+            <div class="card">
+                <h5 class="card-header">@item.publicoAlvo</h5>
+                <div class="card-body">
+                    <h5 class="card-title">@item.nome</h5>
+                    <p class="card-text">@item.resumo</p>
+                    <a href="/Cursos/Details/@item.Id" class="btn btn-primary">Veja mais </a>
+                </div>
+            </div>
+        </div>
+}

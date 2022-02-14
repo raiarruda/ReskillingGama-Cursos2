@@ -26,6 +26,11 @@ namespace Cursos.Controllers
             return View(await _context.Professor.ToListAsync());
         }
 
+        public async Task<IActionResult> IndexPainelAdm()
+        {
+            return View(await _context.Professor.ToListAsync());
+        }
+
         // GET: Professores/Details/5
         public async Task<IActionResult> Details(int id)
         {

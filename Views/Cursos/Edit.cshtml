@@ -8,7 +8,52 @@
 
 <h4>Curso</h4>
 <hr />
-<div class="row">
+
+<div class="container">
+
+
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row mb-3">
+        <label asp-for="thumbnail" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10"><input asp-for="thumbnail" class="form-control" /> </div>
+        <span asp-validation-for="thumbnail" class="text-danger"></span>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="nome" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10"><input asp-for="nome" class="form-control" /></div>
+        <span asp-validation-for="nome" class="text-danger"></span>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="resumo" class="col-sm-2 col-form-label"></label>
+       <div class="col-sm-10"> <input asp-for="resumo" class="form-control" /></div>
+        <span asp-validation-for="resumo" class="text-danger"></span>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="descricao" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10"><input asp-for="descricao" class="form-control" /></div>
+        <span asp-validation-for="descricao" class="text-danger"></span>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="publicoAlvo" class="col-sm-2 col-form-label"></label>
+       <div class="col-sm-10"> <input asp-for="publicoAlvo" class="form-control" /></div>
+        <span asp-validation-for="publicoAlvo" class="text-danger"></span>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="cargaHoraria" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10"><input asp-for="cargaHoraria" class="form-control" /></div>
+        <span asp-validation-for="cargaHoraria" class="text-danger"></span>
+    </div>
+    <div class="row mb-3">
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+    </div>
+</form>
+</div>
+
+
+
+@*<div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -48,10 +93,10 @@
             </div>
         </form>
     </div>
-</div>
+</div> *@
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {

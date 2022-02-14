@@ -4,62 +4,42 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Curso</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.thumbnail)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.thumbnail)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.resumo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.resumo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.publicoAlvo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.publicoAlvo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cargaHoraria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.cargaHoraria)
-        </dd>
-    </dl>
+<div class="list-group">
+  <h6 href="#" class="list-group-item list-group-item-action">@Model.nome</h6>
+
+  <li  class="list-group-item list-group-item-action list-group-item-primary">
+     Publico-alvo: @Model.publicoAlvo;
+  </li>
+  <li class="list-group-item list-group-item-action list-group-item-secondary">
+      Carga Horaria:  @Model.cargaHoraria</li>
+  <li class="list-group-item list-group-item-action list-group-item-success">
+      Descrição : @Model.descricao
+    
+  </li>
+  
 </div>
 
-@foreach(var item in Model.aulas)
-{
-    @*<p> @Html.DisplayFor(item => item.numeroOrdem)</p>*@
+
+
+<section>
+    <h4>Veja como o curso está divido</h4>
+
+     <ul class="list-group">
+    @foreach (var item in Model.aulas)
+    {
 
        
-    <p>@item.numeroOrdem</p>
-    <p>@item.titulo</p>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">@item.titulo</div>
+                    @item.descricao
+                </div>
+                <span class="badge bg-primary rounded-pill">@item.numeroOrdem</span>
+            </li>
+           
 
-}
+    }
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    </ul>
+</section>

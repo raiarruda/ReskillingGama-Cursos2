@@ -34,15 +34,42 @@ namespace Cursos.Controllers
             return View(homeViewModel);
         }
 
-        public IActionResult Privacy()
+
+
+        public IActionResult CursosIndex()
         {
-            return View();
+            List<Curso> cursos = _context.Curso.OrderBy(c => c.nome).ToList();
+          
+
+            return View(cursos);
         }
-        [Authorize(Roles="Administrador")]
-        public IActionResult Painel()
+
+
+
+
+
+        public IActionResult PRofessoresIndex()
         {
-            return View();
+
+            List<Professor> professores = _context.Professor.OrderBy(c => c.nome).ToList();
+
+
+            return View(professores);
+          
         }
+
+
+
+        public IActionResult BlogIndex()
+        {
+            List<PostagemBlog> postagens = _context.PostagemBlogs.OrderByDescending(c => c.dataPublicacao).ToList();
+
+
+            return View(postagens);
+        }
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

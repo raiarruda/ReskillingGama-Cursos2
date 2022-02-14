@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Cursos.Models.Entidades.PostagemBlog>
+
+@{
+    
+    ViewData["Title"] = "Blog";
+}
+
+<h1>
+    BLOG
+</h1>
+
+
+
+
+@foreach(var item in Model)
+{
+    <h2>@item.tituloPost</h2>
+}

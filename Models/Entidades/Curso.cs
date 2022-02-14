@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cursos.Models.Entidades
 {
@@ -11,14 +12,17 @@ namespace Cursos.Models.Entidades
 
         [Key]
         public int Id { get; set; }
+        [DisplayName("Imagem")]
         public string thumbnail { get; set; }
+        [DisplayName("Nome ")]
         public string nome { get; set; }
-        //[DisplayName("O que você vai aprender")]
+        [DisplayName("Resumo")]
         public string resumo { get; set; }
-
+        [DisplayName("Descrição")]
         public string descricao { get; set; }
+        [DisplayName("Público Alvo")]
         public string publicoAlvo { get; set; }
-
+        [DisplayName("Carga Horária")]
         public int cargaHoraria { get; set; }
 
         public virtual ICollection<Aula> Aulas { get; set; }
