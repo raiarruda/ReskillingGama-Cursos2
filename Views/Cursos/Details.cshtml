@@ -6,58 +6,7 @@
 
 <h1>Details</h1>
 
-<div>
-    <h4>Curso</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.thumbnail)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.thumbnail)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.resumo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.resumo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.descricao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.descricao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.publicoAlvo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.publicoAlvo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.cargaHoraria)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.cargaHoraria)
-        </dd>
-    </dl>
-</div>
 
-@foreach (var item in Model.aulas)
-{
-    @*<p> @Html.DisplayFor(item => item.numeroOrdem)</p>*@
-
-
-    <p>@item.numeroOrdem</p>
-    <p>@item.titulo</p>
-
-}
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
@@ -71,7 +20,7 @@
                 <div class="col">
                     <h5 class="card-title">@Html.DisplayFor(model => model.nome)</h5>
                     <p class="card-text">@Html.DisplayNameFor(model => model.descricao)</p>
-                    
+
                 </div>
                 <div class="col">
                     <div class="row">
@@ -117,7 +66,71 @@
     </div>
     <div class="card-body">
         <h5 class="card-title">Programação</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        @foreach (var item in Model.aulas)
+        {
+            <div class="row">
+                <div class="col-1">
+                    <i>P</i>
+                </div>
+                <div class="col">
+                    <h5 class="card-title">@item.numeroOrdem. @item.titulo </h5>
+                    <p class="card-text">@item.numeroOrdem. @item.titulo</p>
+                </div>
+            </div>
+        }
         <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
 </section>
+
+@*<div>
+    <h4>Curso</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.thumbnail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.thumbnail)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.resumo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.resumo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.descricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.publicoAlvo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.publicoAlvo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.cargaHoraria)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.cargaHoraria)
+        </dd>
+    </dl>
+</div>
+
+@foreach (var item in Model.aulas)
+{
+    <p> @Html.DisplayFor(item => item.numeroOrdem)</p>
+
+
+    <p>@item.numeroOrdem</p>
+    <p>@item.titulo</p>
+
+}*@
