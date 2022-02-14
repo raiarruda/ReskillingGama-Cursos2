@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Cursos.Models.Entidades.Curso>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@foreach (var item in Model) {
+
+
+<div class="card mb-3" style="max-width: 540px;">
+
+    <div class="col-md-4">
+      <img src="@Html.DisplayFor(modelItem => item.thumbnail)" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col">
+      <div class="card-body">
+        <h5 class="card-title">@Html.DisplayFor(modelItem => item.nome)</h5>
+        <p class="card-text">@Html.DisplayFor(modelItem => item.resumo)</p>
+        <p class="card-text"><a  class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Veja mais</a> |</p>
+        
+      </div>
+    </div>
+ 
+</div>
+
+
+}

@@ -1,0 +1,60 @@
+﻿@model Cursos.Models.Entidades.Professor
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Professor</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sobre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sobre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.foto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.foto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.urlFacebook)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.urlFacebook)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.urlTwitter)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.urlTwitter)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.urlInstagram)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.urlInstagram)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
