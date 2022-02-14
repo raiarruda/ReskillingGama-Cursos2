@@ -2,6 +2,7 @@
 using Cursos.Models;
 using Cursos.Models.Entidades;
 using Cursos.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApplication2.Data;
@@ -34,6 +35,11 @@ namespace Cursos.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        [Authorize(Roles="Administrador")]
+        public IActionResult Painel()
         {
             return View();
         }
