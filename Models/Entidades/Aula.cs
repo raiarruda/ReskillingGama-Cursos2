@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cursos.Models.Entidades
 {
@@ -6,8 +7,11 @@ namespace Cursos.Models.Entidades
     {
         [Key]
         public int Id { get; set; }
+        [DisplayName("Numero")]
         public int numeroOrdem { get; set; }
+        [Display(Name ="Titulo")]
         public string titulo { get; set; }
+        [Display(Name ="Resumo")]
         public string descricao { get; set; }
         
         public int cursoId { get; set; }

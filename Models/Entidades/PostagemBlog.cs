@@ -6,15 +6,16 @@ namespace Cursos.Models.Entidades
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name ="Título")]
         public string tituloPost { get; set; }
-        
+        [Display(Name ="Url da Imagem")]
         public string imagemCapa { get; set; }
-
+        [Display(Name = "Conteúdo")]
         public string conteudo { get; set; }
         public int? gostei { get; set; } = 0;
         public int? naoGostei { get; set; } = 0;
 
-        public DateTime dataPublicacao { get; set; } = DateTime.Now;
+        public DateTime? dataPublicacao { get; set; } = DateTime.Now;
 
         public string autor { get; set; }
     }

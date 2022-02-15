@@ -15,7 +15,7 @@ namespace Cursos.Models.ViewModels
         public string resumo { get; set; }
         [DisplayName("Detalhes do curso")]
         public string descricao { get; set; }
-        [DisplayName("Publico Alvo")]
+        [DisplayName("Público Alvo")]
         public string publicoAlvo { get; set; }
         [DisplayName("Carga Horária")]
         public int cargaHoraria { get; set; }

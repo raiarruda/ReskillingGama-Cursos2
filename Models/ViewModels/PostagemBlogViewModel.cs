@@ -17,7 +17,7 @@ namespace Cursos.Models.ViewModels
         public int? gostei { get; set; } = 0;
         public int? naoGostei { get; set; } = 0;
         [DisplayName("Data de Publicação")]
-        public DateTime dataPublicacao { get; set; } = DateTime.Now;
+        public DateTime? dataPublicacao { get; set; } = DateTime.Now;
         [DisplayName("Autor da Postagem")]
         public string autor { get; set; }
 
