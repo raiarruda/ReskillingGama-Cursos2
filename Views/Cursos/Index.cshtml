@@ -31,7 +31,7 @@
                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Visualizar</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Remover</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Ver aulas</a>
+                <a asp-controller="Aulas" asp-action="AulasPorCurso" asp-route-id="@item.Id">Ver aulas de @item.Id</a>
                 </td>
             </tr>
 
