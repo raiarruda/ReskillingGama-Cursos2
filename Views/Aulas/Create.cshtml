@@ -1,10 +1,10 @@
 ﻿@model Cursos.Models.Entidades.Aula
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cadastrar Aula";
 }
 
-<h1>Create</h1>
+<h1>Cadastrar aula para o curso</h1>
 
 <h4>Aula</h4>
 <hr />
@@ -30,6 +30,7 @@
             <div class="form-group">
                 <label asp-for="cursoId" class="control-label"></label>
                 <select asp-for="cursoId" class ="form-control" asp-items="ViewBag.cursoId"></select>
+
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

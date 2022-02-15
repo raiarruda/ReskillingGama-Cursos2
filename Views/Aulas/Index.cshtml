@@ -1,34 +1,33 @@
-﻿@model IEnumerable<Cursos.Models.Entidades.Aula>
+﻿@model Cursos.Models.ViewModels.AulaViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = @Model.idCurso;
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-route-id="@Model.idCurso">Cadastrar Aula do Curso @Model.idCurso</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.numeroOrdem)
+                Numero Ordem
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.titulo)
+               Título
+            <th>
+               DEscrição
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.curso)
+              Curso
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Aulas) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.numeroOrdem)

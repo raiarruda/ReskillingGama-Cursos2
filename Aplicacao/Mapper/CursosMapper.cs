@@ -10,7 +10,7 @@ namespace Cursos.Aplicacao.Mapper
         {
             CreateMap<Curso, CursoViewModel>();
             CreateMap<PostagemBlog, PostagemBlogViewModel>();
-
+            CreateMap<Aula, AulaViewModel>();
         }
                 
                 

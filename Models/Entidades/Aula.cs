@@ -13,7 +13,7 @@ namespace Cursos.Models.Entidades
         public string titulo { get; set; }
         [Display(Name ="Resumo")]
         public string descricao { get; set; }
-        
+        [Display(Name ="Curso")]
         public int cursoId { get; set; }
 
         public virtual Curso? curso { get; set; }
