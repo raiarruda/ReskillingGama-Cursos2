@@ -27,13 +27,22 @@ namespace Cursos.Controllers
         // GET: Aulas
         public async Task<IActionResult> Index(int id)
         {
-            var aulasPorCurso = new AulaViewModel();
-            var context = _context.Aula.Include(a => a.curso).Where(a=> a.cursoId==id).ToList();
-            aulasPorCurso.Aulas = context;
-            aulasPorCurso.idCurso = id;
+            if (id != null)
+            {
+                var aulasPorCurso = new AulaViewModel();
+                var context = _context.Aula.Include(a => a.curso).Where(a => a.cursoId == id).ToList();
+                aulasPorCurso.Aulas = context;
+                aulasPorCurso.idCurso = id;
+                return View(aulasPorCurso);
+            }
+            else {
 
+                var context = _context.Aula.Include(a => a.curso).ToList();
 
-            return View(aulasPorCurso);
+                return View(context);
+            }
+
+          
         }
 
         // GET: Aulas/Details/5
@@ -56,7 +65,7 @@ namespace Cursos.Controllers
         }
 
         // GET: Aulas/Create
-        public IActionResult Create(int? id)
+        public IActionResult Create()
         {
             
             ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "nome");
@@ -79,7 +88,7 @@ namespace Cursos.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "nome", aula.cursoId);
-            return View(aula);
+            return View(Index(aula.cursoId));
         }
 
         // GET: Aulas/Edit/5
