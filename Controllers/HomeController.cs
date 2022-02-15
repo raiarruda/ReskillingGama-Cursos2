@@ -4,6 +4,7 @@ using Cursos.Models.Entidades;
 using Cursos.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebApplication2.Data;
 using WebApplication2.Models;
@@ -44,7 +45,37 @@ namespace Cursos.Controllers
             return View(cursos);
         }
 
+        public async Task<IActionResult> CursosDetalhes(int? id)
+        {
 
+
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var curso = await _context.Curso.FirstOrDefaultAsync(m => m.Id == id);
+            CursoViewModel cursoViewModel = new CursoViewModel();
+            List<Aula> aulasCurso = _context.Aula.Where(c => c.cursoId == id).ToList();
+
+            if (curso == null)
+            {
+                return NotFound();
+            }
+
+            cursoViewModel.Id = curso.Id;
+            cursoViewModel.thumbnail = curso.thumbnail;
+            cursoViewModel.nome = curso.nome;
+            cursoViewModel.resumo = curso.resumo;
+            cursoViewModel.descricao = curso.descricao;
+            cursoViewModel.cargaHoraria = curso.cargaHoraria;
+            cursoViewModel.publicoAlvo = curso.publicoAlvo;
+            cursoViewModel.aulas = aulasCurso;
+
+
+            return View(cursoViewModel);
+        }
 
 
 

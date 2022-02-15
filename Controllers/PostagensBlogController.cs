@@ -55,7 +55,7 @@ namespace Cursos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,tituloPost,imagemCapa,conteudo,gostei,naoGostei,dataPublicacao,autor")] PostagemBlog postagemBlog)
+        public async Task<IActionResult> Create([Bind("Id,tituloPost,imagemCapa,conteudo,autor")] PostagemBlog postagemBlog)
         {
             if (ModelState.IsValid)
             {

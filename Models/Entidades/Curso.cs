@@ -23,6 +23,7 @@ namespace Cursos.Models.Entidades
         [DisplayName("Público Alvo")]
         public string publicoAlvo { get; set; }
         [DisplayName("Carga Horária")]
+        [Range(0, int.MaxValue, ErrorMessage ="Não pode cadastrar curso com carga horária negativa")]
         public int cargaHoraria { get; set; }
 
         public virtual ICollection<Aula> Aulas { get; set; }
