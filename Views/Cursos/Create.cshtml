@@ -1,62 +1,62 @@
 ﻿@model Cursos.Models.Entidades.Curso
 
+
 @{
     ViewData["Title"] = "Novo Curso";
 }
+<section>
+    <div>
+        <h1>Novo Curso </h1>
 
-<h1>Novo Curso </h1>
-
-<h4>Curso</h4>
-<hr />
-
-
-
-<div class="container">
-
-
-
-<form asp-action="Create">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="row mb-3">
-        <label asp-for="thumbnail" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10"><input asp-for="thumbnail" class="form-control" /> </div>
-        <span asp-validation-for="thumbnail" class="text-danger"></span>
+        <h4>Curso</h4>
+        <hr />
     </div>
-    <div class="row mb-3">
-        <label asp-for="nome" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10"><input asp-for="nome" class="form-control" /></div>
-        <span asp-validation-for="nome" class="text-danger"></span>
-    </div>
-    <div class="row mb-3">
-        <label asp-for="resumo" class="col-sm-2 col-form-label"></label>
-       <div class="col-sm-10"> <input asp-for="resumo" class="form-control" /></div>
-        <span asp-validation-for="resumo" class="text-danger"></span>
-    </div>
-    <div class="row mb-3">
-        <label asp-for="descricao" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10"><input asp-for="descricao" class="form-control" /></div>
-        <span asp-validation-for="descricao" class="text-danger"></span>
-    </div>
-    <div class="row mb-3">
-        <label asp-for="publicoAlvo" class="col-sm-2 col-form-label"></label>
-       <div class="col-sm-10"> <input asp-for="publicoAlvo" class="form-control" /></div>
-        <span asp-validation-for="publicoAlvo" class="text-danger"></span>
-    </div>
-    <div class="row mb-3">
-        <label asp-for="cargaHoraria" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10"><input asp-for="cargaHoraria" class="form-control" /></div>
-        <span asp-validation-for="cargaHoraria" class="text-danger"></span>
-    </div>
-    <div class="row mb-3">
-        <input type="submit" value="cadastrar" class="btn btn-primary" />
-    </div>
-</form>
-</div>
 
-<div>
-    <a asp-action="Index">Retornar</a>
-</div>
 
+    <div class="container">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-2">
+                <label asp-for="thumbnail" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10"><input asp-for="thumbnail" class="form-control" /> </div>
+                <span asp-validation-for="thumbnail" class="text-danger"></span>
+            </div>
+            <div class="row mb-2">
+                <label asp-for="nome" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10"><input asp-for="nome" class="form-control" /></div>
+                <span asp-validation-for="nome" class="text-danger"></span>
+            </div>
+            <div class="row mb-2">
+                <label asp-for="resumo" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10"> <input asp-for="resumo" class="form-control" /></div>
+                <span asp-validation-for="resumo" class="text-danger"></span>
+            </div>
+            <div class="row mb-2">
+                <label asp-for="descricao" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10"><textarea asp-for="descricao" class="form-control"></textarea></div>
+                <span asp-validation-for="descricao" class="text-danger"></span>
+            </div>
+            <div class="row mb-2">
+                <label asp-for="publicoAlvo" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10"> <input asp-for="publicoAlvo" class="form-control" /></div>
+                <span asp-validation-for="publicoAlvo" class="text-danger"></span>
+            </div>
+            <div class="row mb-4">
+                <label asp-for="cargaHoraria" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10"><input asp-for="cargaHoraria" class="form-control" /></div>
+                <span asp-validation-for="cargaHoraria" class="text-danger"></span>
+            </div>
+            <div class="row mb-3">
+                <div class="d-grid col-2 ms-auto">
+                    <input type="submit" value="cadastrar" class="btn btn-success" />
+                </div>
+                <div class="d-grid col-2 me-auto">
+                    <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
 @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
