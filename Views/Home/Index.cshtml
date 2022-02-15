@@ -4,78 +4,54 @@
     ViewData["Title"] = "Home Page";
 }
 <section>
-    <div class="container-fluid banner">
-
+    <div class="container">
+        <div class="banner"></div>
+            <div class="card-body">
+                <h1 class="card-title">Cronos</h1>
+                <h1>Solução em Tecnologia</h1>
+                <p class="card-text">Estude UX Design e aprenda técnicas para criar soluções eficazes e produtos valiosos e lucrativos para usuários e empresas.</p>
+            </div>
     </div>
 </section>
 
-<div class="container position-relative px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-            <div class="site-heading">
-                <h1>Cronos - Solução em Tecnologia</h1>
-                <span class="subheading">
-                    Estude UX Design e aprenda técnicas para criar
-                    soluções eficazes e produtos valiosos e lucrativos para usuários e empresas.
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 
 <h1 class="fs-1 mt-4 mb-4">CURSOS</h1>
 
-<div class="row">
+<div class="row row-cols-1 row-cols-md-3 row-cols-sm-1 g-4">
     @foreach (var item in Model.Cursos.Take(3))
     {
-
-
-        <div class="card m-3 col" style="max-width: 540px;">
-
-            <div class="col">
+        <div class="col">
+            <div class="card h-100">
                 <img src="@Html.DisplayFor(modelItem => item.thumbnail)" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col">
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.nome)</h5>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.resumo)</p>
-                    <p class="card-text"><a class="btn btn-info btn-sm" asp-controller="Cursos" asp-action="Details" asp-route-id="@item.Id">Veja mais</a> |</p>
-
+                    <button class="btn btn-warning">
+                        <a class="" asp-action="Details" asp-route-id="@item.Id">Veja mais</a>
+                    </button>
                 </div>
             </div>
-
         </div>
-
     }
 </div>
-
-
-
-
-
-
 <h1 class="fs-1 mt-4 mb-4">BLOG</h1>
-
 <div id="main-content" class="blog-page">
     <div class="container ">
-        <div class="row clearfix d-flex justify-content-around">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-sm-1 g-4">
             @foreach (var item in Model.Postagens.Take(3))
             {
-                <div class="col-lg-8 col-md-12 left-box" style="max-width: 540px;">
-                    <div class="card single_post">
-                        <div class="body">
-                            <div class="img-post">
-                                <img class="d-block img-fluid" src="@Html.DisplayFor(modelItem => item.imagemCapa)" alt="First slide">
-                            </div>
-                            <h3><a href="blog-details.html">@Html.DisplayFor(modelItem => item.tituloPost)</a></h3>
-                            <p> @Html.DisplayFor(modelItem => item.conteudo)</p>
+                <div class="col">
+                    <div class="card h-100">
+                        <img class="d-block img-fluid img-thumbnail" src="@Html.DisplayFor(modelItem => item.imagemCapa)" alt="First slide">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="blog-details.html">@Html.DisplayFor(modelItem => item.tituloPost)</a></h5>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.conteudo)</p>
                         </div>
-
-
                         <div class="footer">
-                            <div class="actions">
+                            <div>
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary">Detalhes</a>
                             </div>
                             <ul class="stats">
