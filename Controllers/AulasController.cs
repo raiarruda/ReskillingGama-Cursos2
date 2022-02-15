@@ -8,23 +8,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cursos.Models.Entidades;
 using WebApplication2.Data;
+using Cursos.Models.ViewModels;
+using AutoMapper;
 
 namespace Cursos.Controllers
 {
     public class AulasController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+ 
         public AulasController(ApplicationDbContext context)
         {
             _context = context;
+  
+   
         }
 
         // GET: Aulas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            var context = _context.Aula.Include(a => a.curso);
-            return View(await context.ToListAsync());
+            var aulasPorCurso = new AulaViewModel();
+            var context = _context.Aula.Include(a => a.curso).Where(a=> a.cursoId==id).ToList();
+            aulasPorCurso.Aulas = context;
+            aulasPorCurso.idCurso = id;
+
+
+            return View(aulasPorCurso);
         }
 
         // GET: Aulas/Details/5
@@ -47,9 +56,11 @@ namespace Cursos.Controllers
         }
 
         // GET: Aulas/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "Id");
+            
+            ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "nome");
+
             return View();
         }
 
@@ -58,15 +69,16 @@ namespace Cursos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,numeroOrdem,titulo,descricao,cursoId")] Aula aula)
+        public async Task<IActionResult> Create([Bind("Id,numeroOrdem,titulo,descricao, cursoId")] Aula aula)
         {
+            //aula.cursoId = id;
             if (ModelState.IsValid)
             {
                 _context.Add(aula);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "Id", aula.cursoId);
+            ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "nome", aula.cursoId);
             return View(aula);
         }
 
