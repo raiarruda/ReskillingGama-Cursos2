@@ -99,6 +99,22 @@ namespace Cursos.Controllers
             return View(postagens);
         }
 
+        public async Task<IActionResult> BlogPostagem(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var postagemBlog = await _context.PostagemBlogs
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (postagemBlog == null)
+            {
+                return NotFound();
+            }
+
+            return View(postagemBlog);
+        }
 
 
 

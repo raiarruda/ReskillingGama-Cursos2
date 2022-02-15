@@ -4,23 +4,46 @@
     ViewData["Title"] = "Página Inicial ";
 }
 
-<h1 class="fs-1 mt-4 mb-4">Conheça nossos CURSOS</h1>
 
-<div class="row">
-    @foreach (var item in Model.Cursos.Take(3))
-    {
-        <div class="col-sm-6">
-            <div class="card">
-                <h5 class="card-header">@item.publicoAlvo</h5>
-                <div class="card-body">
-                    <h5 class="card-title">@item.nome</h5>
-                    <p class="card-text">@item.resumo</p>
-                    <a href="/Home/CursoDetalhes/@item.Id" class="btn btn-primary">Veja mais </a>
+
+
+<header class="masthead">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Cronos - Solução em Tecnologia</h1>
+                    <span class="subheading">
+                        Estude UX Design e aprenda técnicas para criar
+                        soluções eficazes e produtos valiosos e lucrativos para usuários e empresas.
+                    </span>
                 </div>
             </div>
         </div>
-    }
-</div>
+    </div>
+</header>
+
+<h1 class="fs-1 mt-4 mb-4">Conheça nossos CURSOS</h1>
+
+<section>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-sm-1 g-4">
+        @foreach (var item in Model.Cursos.Take(3))
+        {
+        <div class="col">
+            <div class="card h-100">
+                <img src="@Html.DisplayFor(modelItem => item.thumbnail)" class="img-fluid rounded-start" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.nome)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.resumo)</p>
+                    <button class="btn btn-warning">
+                        <a class="" asp-action="CursosDetalhes" asp-route-id="@item.Id">Veja mais</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</section>
 
 <a asp-action="CursosIndex">Ver todos os cursos</a>
 
@@ -42,7 +65,7 @@
                 <div class="card-body">
                     <h5 class="card-title">@item.tituloPost</h5>
                     <p class="card-text"> @item.conteudo</p>
-                    <a ref="/PostagensBlog/Detail/@item.Id" class="btn btn-primary">Artigo Completo</a>
+                    <a href="Home/BlogPostagem/@item.Id" class="btn btn-primary">Artigo Completo</a>
                 </div>
             </div>
         </div>

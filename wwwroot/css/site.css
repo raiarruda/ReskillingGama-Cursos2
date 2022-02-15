@@ -21,3 +21,7 @@ textarea {
     resize: none;
     height: 6rem;
 }
+
+.thead-Plum{
+    background-color: plum;
+}

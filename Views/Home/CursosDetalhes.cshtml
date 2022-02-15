@@ -5,41 +5,71 @@
 }
 
 
-<div class="list-group">
-  <h6 href="#" class="list-group-item list-group-item-action">@Model.nome</h6>
-
-  <li  class="list-group-item list-group-item-action list-group-item-primary">
-     Publico-alvo: @Model.publicoAlvo;
-  </li>
-  <li class="list-group-item list-group-item-action list-group-item-secondary">
-      Carga Horaria:  @Model.cargaHoraria</li>
-  <li class="list-group-item list-group-item-action list-group-item-success">
-      Descrição : @Model.descricao
-    
-  </li>
-  
-</div>
-
-
-
 <section>
-    <h4>Veja como o curso está divido</h4>
+    <div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h5 class="card-title">@Html.DisplayFor(model => model.nome)</h5>
+                    <p class="card-text">@Html.DisplayNameFor(model => model.descricao)</p>
 
-     <ul class="list-group">
-    @foreach (var item in Model.aulas)
-    {
-
-       
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">@item.titulo</div>
-                    @item.descricao
                 </div>
-                <span class="badge bg-primary rounded-pill">@item.numeroOrdem</span>
-            </li>
-           
-
-    }
-
-    </ul>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-1">
+                            <i class="fa-solid fa-user">R</i>
+                        </div>
+                        <div class="col">
+                            <h5 class="card-title">Resumo</h5>
+                            <p class="card-text">@Html.DisplayFor(model => model.resumo)</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                            <i>PA</i>
+                        </div>
+                        <div class="col">
+                            <h5 class="card-title">Público-Alvo</h5>
+                            <p class="card-text">@Html.DisplayFor(model => model.publicoAlvo)</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                            <i>CH</i>
+                        </div>
+                        <div class="col">
+                            <h5 class="card-title">cargaHoraria</h5>
+                            <p class="card-text">@Html.DisplayFor(model => model.cargaHoraria)</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                            <i>F</i>
+                        </div>
+                        <div class="col">
+                            <h5 class="card-title">Formato</h5>
+                            <p class="card-text">Formato da Aula</p>
+                        </div>
+                    </div>
+                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Programação</h5>
+        @foreach (var item in Model.aulas)
+        {
+            <div class="row">
+                <div class="col-1">
+                    <i>P</i>
+                </div>
+                <div class="col">
+                    <h5 class="card-title">@item.numeroOrdem. @item.titulo </h5>
+                    <p class="card-text">@item.numeroOrdem. @item.titulo</p>
+                </div>
+            </div>
+        }
+        @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+    </div>
 </section>
