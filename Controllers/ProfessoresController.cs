@@ -68,7 +68,7 @@ namespace Cursos.Controllers
         }
 
         // GET: Professores/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
