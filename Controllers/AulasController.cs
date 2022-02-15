@@ -10,9 +10,10 @@ using Cursos.Models.Entidades;
 using WebApplication2.Data;
 using Cursos.Models.ViewModels;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cursos.Controllers
-{
+{   [Authorize]
     public class AulasController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -65,12 +66,14 @@ namespace Cursos.Controllers
         }
 
         // GET: Aulas/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
             
             ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "nome");
-
-            return View();
+            var aula = new Aula();
+            aula.cursoId = id;
+        
+            return View(aula);
         }
 
         // POST: Aulas/Create
@@ -78,17 +81,17 @@ namespace Cursos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,numeroOrdem,titulo,descricao, cursoId")] Aula aula)
+        public async Task<IActionResult> Create([Bind("numeroOrdem,titulo,descricao, cursoId")] Aula aula)
         {
             //aula.cursoId = id;
             if (ModelState.IsValid)
             {
                 _context.Add(aula);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new {id=aula.cursoId});
             }
             ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "nome", aula.cursoId);
-            return View(Index(aula.cursoId));
+            return View(aula);
         }
 
         // GET: Aulas/Edit/5
