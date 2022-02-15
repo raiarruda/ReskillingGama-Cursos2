@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+textarea {
+    resize: none;
+    height: 6rem;
+}
