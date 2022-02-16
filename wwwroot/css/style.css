@@ -342,7 +342,7 @@ label {
 }
 
 button {
-    border-radius: 0;
+    border-radius: 3;
 }
 
     button:focus:not(:focus-visible) {
@@ -3129,7 +3129,7 @@ textarea.form-control-lg {
     border: 1px solid transparent;
     padding: 1rem 1.75rem;
     font-size: 0.875rem;
-    border-radius: 0;
+    border-radius: 8;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
