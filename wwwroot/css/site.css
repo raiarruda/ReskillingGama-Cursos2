@@ -22,8 +22,6 @@ textarea {
     height: 6rem;
 }
 
-
-/* CSS HEX */
 .blue1 {
     background-color: #8094F0ff;
 }
@@ -36,3 +34,28 @@ textarea {
     background-color: #CFC8DEff;
 }
 
+.professor-card img {
+    height: 12rem;
+    width: 12rem;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 30px;
+}
+
+.professor-card h5 {
+    text-align: center;
+}
+
+.professor-card i {
+}
+
+.text {
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 9.6rem;
+    max-height: 9.6rem;
+}
