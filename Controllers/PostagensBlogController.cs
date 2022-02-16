@@ -8,34 +8,34 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cursos.Models.Entidades;
 using WebApplication2.Data;
+using WebApplication2.Dominio.Interfaces;
 
 namespace Cursos.Controllers
 {
     public class PostagensBlogController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IPostagensBlogRepository _postagemBlogRepository;
 
-        public PostagensBlogController(ApplicationDbContext context)
+        public PostagensBlogController(IPostagensBlogRepository postagemBlogRepository)
         {
-            _context = context;
+            _postagemBlogRepository=postagemBlogRepository;
         }
 
         // GET: PostagensBlog
         public async Task<IActionResult> Manage()
         {
-            return View(await _context.PostagemBlogs.OrderByDescending(p=>p.dataPublicacao).ToListAsync());
+            return View(_postagemBlogRepository.ObterTodos());
         }
 
         // GET: PostagensBlog/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var postagemBlog = await _context.PostagemBlogs
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var postagemBlog = _postagemBlogRepository.ObterPorId(id);
             if (postagemBlog == null)
             {
                 return NotFound();
@@ -59,22 +59,22 @@ namespace Cursos.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(postagemBlog);
-                await _context.SaveChangesAsync();
+                _postagemBlogRepository.CriarNovo(postagemBlog);
+                _postagemBlogRepository.Salvar();
                 return RedirectToAction(nameof(Index));
             }
             return View(postagemBlog);
         }
 
         // GET: PostagensBlog/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var postagemBlog = await _context.PostagemBlogs.FindAsync(id);
+            var postagemBlog = _postagemBlogRepository.ObterPorId(id);
             if (postagemBlog == null)
             {
                 return NotFound();
@@ -82,9 +82,7 @@ namespace Cursos.Controllers
             return View(postagemBlog);
         }
 
-        // POST: PostagensBlog/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,tituloPost,imagemCapa,conteudo,gostei,naoGostei,dataPublicacao,autor")] PostagemBlog postagemBlog)
@@ -98,8 +96,8 @@ namespace Cursos.Controllers
             {
                 try
                 {
-                    _context.Update(postagemBlog);
-                    await _context.SaveChangesAsync();
+                    _postagemBlogRepository.Atualiza(postagemBlog);
+                    _postagemBlogRepository.Salvar();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,15 +117,14 @@ namespace Cursos.Controllers
 
     
         // GET: PostagensBlog/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var postagemBlog = await _context.PostagemBlogs
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var postagemBlog = _postagemBlogRepository.ObterPorId(id);
             if (postagemBlog == null)
             {
                 return NotFound();
@@ -141,20 +138,20 @@ namespace Cursos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var postagemBlog = await _context.PostagemBlogs.FindAsync(id);
-            _context.PostagemBlogs.Remove(postagemBlog);
-            await _context.SaveChangesAsync();
+            var postagemBlog = _postagemBlogRepository.ObterPorId(id);
+            _postagemBlogRepository.Deleta(postagemBlog);
+            _postagemBlogRepository.Salvar();
             return RedirectToAction(nameof(Index));
         }
         [HttpPost, ActionName("Like")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Like(int id)
         {
-            var postagemBlog = await _context.PostagemBlogs.FindAsync(id);
+            var postagemBlog = _postagemBlogRepository.ObterPorId(id);
             postagemBlog.gostei += 1;
-            
-            _context.PostagemBlogs.Update(postagemBlog);
-            await _context.SaveChangesAsync();
+
+            _postagemBlogRepository.Atualiza(postagemBlog);
+            _postagemBlogRepository.Salvar();
             return RedirectToAction(nameof(Details), new {@id = id});
         }
 
@@ -163,38 +160,37 @@ namespace Cursos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Dislike(int id)
         {
-            var postagemBlog = await _context.PostagemBlogs.FindAsync(id);
+            var postagemBlog = _postagemBlogRepository.ObterPorId(id);
             postagemBlog.naoGostei += 1;
 
-            _context.PostagemBlogs.Update(postagemBlog);
-            await _context.SaveChangesAsync();
+            _postagemBlogRepository.Atualiza(postagemBlog);
+            _postagemBlogRepository.Salvar();
             return RedirectToAction(nameof(Details), new { @id = id });
         }
 
         private bool PostagemBlogExists(int id)
         {
-            return _context.PostagemBlogs.Any(e => e.Id == id);
+            return _postagemBlogRepository.Exists(id);
         }
 
         //controller public 
 
         public IActionResult Index()
         {
-            List<PostagemBlog> postagens = _context.PostagemBlogs.OrderByDescending(c => c.dataPublicacao).ToList();
+            List<PostagemBlog> postagens = _postagemBlogRepository.ObterTodos();
 
 
             return View(postagens);
         }
 
-        public async Task<IActionResult> Post(int? id)
+        public async Task<IActionResult> Post(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var postagemBlog = await _context.PostagemBlogs
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var postagemBlog = _postagemBlogRepository.ObterPorId(id);
             if (postagemBlog == null)
             {
                 return NotFound();
