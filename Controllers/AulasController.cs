@@ -11,16 +11,18 @@ using WebApplication2.Data;
 using Cursos.Models.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using WebApplication2.Dominio.Interfaces;
 
 namespace Cursos.Controllers
 {   [Authorize]
     public class AulasController : Controller
     {
-        private readonly ApplicationDbContext _context;
- 
-        public AulasController(ApplicationDbContext context)
+   //     private readonly ApplicationDbContext _context;
+        private readonly IAulasRepository _aulasRepository;
+
+        public AulasController(IAulasRepository aulasRepository)
         {
-            _context = context;
+            _aulasRepository = aulasRepository;
   
    
         }
@@ -31,14 +33,15 @@ namespace Cursos.Controllers
             if (id != null)
             {
                 var aulasPorCurso = new AulaViewModel();
-                var context = _context.Aula.Include(a => a.curso).Where(a => a.cursoId == id).ToList();
-                aulasPorCurso.Aulas = context;
+                //      var context = _context.Aula.Include(a => a.curso).Where(a => a.cursoId == id).ToList();
+                 
+                aulasPorCurso.Aulas = _aulasRepository.ObterPorCurso(id);
                 aulasPorCurso.idCurso = id;
                 return View(aulasPorCurso);
             }
             else {
 
-                var context = _context.Aula.Include(a => a.curso).ToList();
+                var context = _aulasRepository.ObterTodos();
 
                 return View(context);
             }
@@ -47,16 +50,14 @@ namespace Cursos.Controllers
         }
 
         // GET: Aulas/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var aula = await _context.Aula
-                .Include(a => a.curso)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var aula = _aulasRepository.ObterPorId(id);
             if (aula == null)
             {
                 return NotFound();
@@ -69,7 +70,7 @@ namespace Cursos.Controllers
         public IActionResult Create(int id)
         {
             
-            ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "nome");
+         //   ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "nome");
             var aula = new Aula();
             aula.cursoId = id;
         
@@ -86,28 +87,28 @@ namespace Cursos.Controllers
             //aula.cursoId = id;
             if (ModelState.IsValid)
             {
-                _context.Add(aula);
-                await _context.SaveChangesAsync();
+                _aulasRepository.CriarNovo(aula);
+                _aulasRepository.Salvar();
                 return RedirectToAction(nameof(Index), new {id=aula.cursoId});
             }
-            ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "nome", aula.cursoId);
+           // ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "nome", aula.cursoId);
             return View(aula);
         }
 
         // GET: Aulas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var aula = await _context.Aula.FindAsync(id);
+            var aula = _aulasRepository.ObterPorId(id);
             if (aula == null)
             {
                 return NotFound();
             }
-            ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "Id", aula.cursoId);
+        //    ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "Id", aula.cursoId);
             return View(aula);
         }
 
@@ -127,8 +128,8 @@ namespace Cursos.Controllers
             {
                 try
                 {
-                    _context.Update(aula);
-                    await _context.SaveChangesAsync();
+                    _aulasRepository.Atualiza(aula);
+                    _aulasRepository.Salvar();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -143,21 +144,19 @@ namespace Cursos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "Id", aula.cursoId);
+      //      ViewData["cursoId"] = new SelectList(_context.Curso, "Id", "Id", aula.cursoId);
             return View(aula);
         }
 
         // GET: Aulas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var aula = await _context.Aula
-                .Include(a => a.curso)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var aula = _aulasRepository.ObterPorId(id);
             if (aula == null)
             {
                 return NotFound();
@@ -171,15 +170,15 @@ namespace Cursos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var aula = await _context.Aula.FindAsync(id);
-            _context.Aula.Remove(aula);
-            await _context.SaveChangesAsync();
+            var aula = _aulasRepository.ObterPorId(id);
+            _aulasRepository.Deleta(aula);
+            _aulasRepository.Salvar();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AulaExists(int id)
         {
-            return _context.Aula.Any(e => e.Id == id);
+            return _aulasRepository.Exists(id);
         }
     }
 }

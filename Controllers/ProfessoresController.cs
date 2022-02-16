@@ -8,35 +8,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cursos.Models.Entidades;
 using WebApplication2.Data;
+using WebApplication2.Dominio.Interfaces;
 
 namespace Cursos.Controllers
 {
     public class ProfessoresController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
+        private readonly IProfessoresRepository _professoresRepository;
 
-        public ProfessoresController(ApplicationDbContext context)
+        public ProfessoresController(IProfessoresRepository professoresRepository)
         {
-            _context = context;
+            _professoresRepository = professoresRepository;
         }
 
         // GET: Professores
         public async Task<IActionResult> Manage()
         {
-            return View(await _context.Professor.ToListAsync());
+            return View(_professoresRepository.ObterTodos());
         }
 
-        public async Task<IActionResult> IndexPainelAdm()
-        {
-            return View(await _context.Professor.ToListAsync());
-        }
-
+      
         // GET: Professores/Details/5
         public async Task<IActionResult> Details(int id)
         {
           
-            var professor = await _context.Professor
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var professor = _professoresRepository.ObterPorId(id);
             if (professor == null)
             {
                 return NotFound();
@@ -60,8 +57,8 @@ namespace Cursos.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(professor);
-                await _context.SaveChangesAsync();
+                _professoresRepository.CriarNovo(professor);
+                _professoresRepository.Salvar();
                 return RedirectToAction(nameof(Index));
             }
             return View(professor);
@@ -75,7 +72,7 @@ namespace Cursos.Controllers
                 return NotFound();
             }
 
-            var professor = await _context.Professor.FindAsync(id);
+            var professor = _professoresRepository.ObterPorId(id);
             if (professor == null)
             {
                 return NotFound();
@@ -96,8 +93,8 @@ namespace Cursos.Controllers
             {
                 try
                 {
-                    _context.Update(professor);
-                    await _context.SaveChangesAsync();
+                    _professoresRepository.Atualiza(professor);
+                    _professoresRepository.Salvar();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,8 +116,7 @@ namespace Cursos.Controllers
         public async Task<IActionResult> Delete(int id)
         {
           
-            var professor = await _context.Professor
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var professor = _professoresRepository.ObterPorId(id);
             if (professor == null)
             {
                 return NotFound();
@@ -134,15 +130,15 @@ namespace Cursos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var professor = await _context.Professor.FindAsync(id);
-            _context.Professor.Remove(professor);
-            await _context.SaveChangesAsync();
+            var professor = _professoresRepository.ObterPorId(id);
+            _professoresRepository.Deleta(professor);
+            _professoresRepository.Salvar();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProfessorExists(int id)
         {
-            return _context.Professor.Any(e => e.Id == id);
+            return _professoresRepository.Exists(id);
         }
 
 
@@ -151,7 +147,7 @@ namespace Cursos.Controllers
         public IActionResult Index()
         {
 
-            List<Professor> professores = _context.Professor.OrderBy(c => c.nome).ToList();
+            List<Professor> professores = _professoresRepository.ObterTodos() ;
 
 
             return View(professores);

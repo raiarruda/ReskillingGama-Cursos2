@@ -10,27 +10,31 @@ using Cursos.Models.Entidades;
 using AutoMapper;
 using Cursos.Models.ViewModels;
 using WebApplication2.Data;
+using WebApplication2.Dominio.Interfaces;
 
 namespace Cursos.Controllers
 {
     public class CursosController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
-        public CursosController(ApplicationDbContext context, IMapper mapper)
+        private readonly ICursosRepository _cursoRepository;
+        private readonly IAulasRepository _aulasRepository;
+        public CursosController(ICursosRepository cursosRepository, IAulasRepository aulasRepository, IMapper mapper)
         {
-            _context = context;
+            _cursoRepository = cursosRepository;
+            _aulasRepository = aulasRepository;
             _mapper = mapper;
         }
 
         // GET: Cursos
         public async Task<IActionResult> Manage()
         {
-            return View(await _context.Curso.ToListAsync());
+            return View(_cursoRepository.ObterTodos());
         }
 
         // GET: Cursos/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
            
 
@@ -40,9 +44,9 @@ namespace Cursos.Controllers
                 return NotFound();
             }
 
-            var curso = await _context.Curso.FirstOrDefaultAsync(m => m.Id == id);
+            var curso = _cursoRepository.ObterPorId(id);
             CursoViewModel cursoViewModel = new CursoViewModel();
-            List<Aula> aulasCurso = _context.Aula.Where(c => c.cursoId == id).ToList();
+            List<Aula> aulasCurso = _aulasRepository.ObterPorCurso(id);
 
             if (curso == null)
             {
@@ -77,22 +81,22 @@ namespace Cursos.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(curso);
-                await _context.SaveChangesAsync();
+                _cursoRepository.CriarNovo(curso);
+                _cursoRepository.Salvar();
                 return RedirectToAction(nameof(Index));
             }
             return View(curso);
         }
 
         // GET: Cursos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var curso = await _context.Curso.FindAsync(id);
+            var curso = _cursoRepository.ObterPorId(id);
             if (curso == null)
             {
                 return NotFound();
@@ -116,8 +120,8 @@ namespace Cursos.Controllers
             {
                 try
                 {
-                    _context.Update(curso);
-                    await _context.SaveChangesAsync();
+                    _cursoRepository.Atualiza(curso);
+                    _cursoRepository.Salvar();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -136,15 +140,14 @@ namespace Cursos.Controllers
         }
 
         // GET: Cursos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var curso = await _context.Curso
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var curso = _cursoRepository.ObterPorId(id);
             if (curso == null)
             {
                 return NotFound();
@@ -158,15 +161,15 @@ namespace Cursos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var curso = await _context.Curso.FindAsync(id);
-            _context.Curso.Remove(curso);
-            await _context.SaveChangesAsync();
+            var curso = _cursoRepository.ObterPorId(id);
+            _cursoRepository.Deleta(curso);
+            _cursoRepository.Salvar();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CursoExists(int id)
         {
-            return _context.Curso.Any(e => e.Id == id);
+            return _cursoRepository.Exists(id);
         }
 
 
@@ -176,13 +179,13 @@ namespace Cursos.Controllers
 
         public IActionResult Index()
         {
-            List<Curso> cursos = _context.Curso.OrderBy(c => c.nome).ToList();
+            List<Curso> cursos = _cursoRepository.ObterTodos().OrderBy(c => c.nome).ToList();
 
 
             return View(cursos);
         }
 
-        public async Task<IActionResult> CursosDetalhes(int? id)
+        public async Task<IActionResult> CursosDetalhes(int id)
         {
 
 
@@ -192,9 +195,9 @@ namespace Cursos.Controllers
                 return NotFound();
             }
 
-            var curso = await _context.Curso.FirstOrDefaultAsync(m => m.Id == id);
+            var curso = _cursoRepository.ObterPorId(id);
             CursoViewModel cursoViewModel = new CursoViewModel();
-            List<Aula> aulasCurso = _context.Aula.Where(c => c.cursoId == id).ToList();
+            List<Aula> aulasCurso = _aulasRepository.ObterPorCurso(id);
 
             if (curso == null)
             {

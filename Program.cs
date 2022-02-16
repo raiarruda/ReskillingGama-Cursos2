@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.Data;
+using WebApplication2.Data.Repository;
+using WebApplication2.Dominio.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,10 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddRazorPages();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddTransient<ICursosRepository, CursoRepository>();
+builder.Services.AddTransient<IAulasRepository, AulaRepository>();
+builder.Services.AddTransient<IProfessoresRepository, ProfessoresRepository>();
 
 var app = builder.Build();
 
