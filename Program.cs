@@ -22,6 +22,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ICursosRepository, CursoRepository>();
 builder.Services.AddTransient<IAulasRepository, AulaRepository>();
 builder.Services.AddTransient<IProfessoresRepository, ProfessoresRepository>();
+builder.Services.AddTransient<IPostagensBlogRepository, PostagensBlogRepository>();
 
 var app = builder.Build();
 
