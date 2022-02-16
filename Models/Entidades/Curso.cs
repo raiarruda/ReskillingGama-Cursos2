@@ -17,8 +17,10 @@ namespace Cursos.Models.Entidades
         [DisplayName("Nome ")]
         public string nome { get; set; }
         [DisplayName("Resumo")]
+        [StringLength(150, ErrorMessage = "Limite de 150 caracteres")]
         public string resumo { get; set; }
         [DisplayName("Descrição")]
+        [StringLength(500, ErrorMessage = "Limite de 500 caracteres")]
         public string descricao { get; set; }
         [DisplayName("Público Alvo")]
         public string publicoAlvo { get; set; }
