@@ -34,6 +34,10 @@ textarea {
     background-color: #CFC8DEff;
 }
 
+.form-title{
+    text-align: center;
+}
+
 .professor-card img {
     height: 12rem;
     width: 12rem;
