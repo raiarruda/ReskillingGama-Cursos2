@@ -8,11 +8,11 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebApplication2
 build_property.RootNamespace = WebApplication2
-build_property.ProjectDir = C:\Users\carlo\source\repos\carlos\WebApplication2\
+build_property.ProjectDir = C:\Users\carlo\Source\Repos\carlos\WebApplication2\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\carlo\source\repos\carlos\WebApplication2
+build_property.MSBuildProjectDirectory = C:\Users\carlo\Source\Repos\carlos\WebApplication2
 build_property._RazorSourceGeneratorDebug = 
 
 [C:/Users/carlo/Source/Repos/carlos/WebApplication2/Areas/Identity/Pages/_ViewStart.cshtml]
