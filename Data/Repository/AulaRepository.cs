@@ -13,7 +13,7 @@ namespace WebApplication2.Data.Repository
 
         public override List<Aula> ObterTodos()
         {
-            return _context.Aula.ToList();
+            return _context.Aula.OrderBy(a=>a.numeroOrdem).ToList();
         }
 
         public override Aula ObterPorId(int id)
@@ -29,7 +29,7 @@ namespace WebApplication2.Data.Repository
 
         public List<Aula> ObterPorCurso(int id)
         {
-            return _context.Aula.Where(c => c.cursoId == id).ToList();
+            return _context.Aula.Where(c => c.cursoId == id).OrderBy(a=>a.numeroOrdem).ToList();
         }
     }
 }
