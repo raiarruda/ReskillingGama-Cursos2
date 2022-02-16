@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Cursos.Models.Entidades;
 using WebApplication2.Data;
 using WebApplication2.Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cursos.Controllers
 {
@@ -21,13 +22,13 @@ namespace Cursos.Controllers
             _postagemBlogRepository=postagemBlogRepository;
         }
 
-        // GET: PostagensBlog
+        [Authorize]
         public async Task<IActionResult> Manage()
         {
             return View(_postagemBlogRepository.ObterTodos());
         }
 
-        // GET: PostagensBlog/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
             if (id == null)
@@ -44,15 +45,12 @@ namespace Cursos.Controllers
             return View(postagemBlog);
         }
 
-        // GET: PostagensBlog/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PostagensBlog/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,tituloPost,imagemCapa,conteudo,autor")] PostagemBlog postagemBlog)
@@ -66,7 +64,7 @@ namespace Cursos.Controllers
             return View(postagemBlog);
         }
 
-        // GET: PostagensBlog/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
@@ -115,8 +113,8 @@ namespace Cursos.Controllers
             return View(postagemBlog);
         }
 
-    
-        // GET: PostagensBlog/Delete/5
+
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
@@ -133,7 +131,7 @@ namespace Cursos.Controllers
             return View(postagemBlog);
         }
 
-        // POST: PostagensBlog/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -143,6 +141,8 @@ namespace Cursos.Controllers
             _postagemBlogRepository.Salvar();
             return RedirectToAction(nameof(Index));
         }
+
+
         [HttpPost, ActionName("Like")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Like(int id)
@@ -173,7 +173,7 @@ namespace Cursos.Controllers
             return _postagemBlogRepository.Exists(id);
         }
 
-        //controller public 
+    
 
         public IActionResult Index()
         {

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Cursos.Models.Entidades;
 using WebApplication2.Data;
 using WebApplication2.Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cursos.Controllers
 {
@@ -22,14 +23,14 @@ namespace Cursos.Controllers
             _professoresRepository = professoresRepository;
         }
 
-        // GET: Professores
+        [Authorize]
         public async Task<IActionResult> Manage()
         {
             return View(_professoresRepository.ObterTodos());
         }
 
-      
-        // GET: Professores/Details/5
+
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
           
@@ -42,7 +43,7 @@ namespace Cursos.Controllers
             return View(professor);
         }
 
-        // GET: Professores/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -64,7 +65,7 @@ namespace Cursos.Controllers
             return View(professor);
         }
 
-        // GET: Professores/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
@@ -112,7 +113,7 @@ namespace Cursos.Controllers
             return View(professor);
         }
 
-        // GET: Professores/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
           
@@ -125,7 +126,7 @@ namespace Cursos.Controllers
             return View(professor);
         }
 
-        // POST: Professores/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -141,8 +142,6 @@ namespace Cursos.Controllers
             return _professoresRepository.Exists(id);
         }
 
-
-        //controller publica 
 
         public IActionResult Index()
         {

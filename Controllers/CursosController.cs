@@ -11,12 +11,13 @@ using AutoMapper;
 using Cursos.Models.ViewModels;
 using WebApplication2.Data;
 using WebApplication2.Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cursos.Controllers
 {
     public class CursosController : Controller
     {
-        //private readonly ApplicationDbContext _context;
+        
         private readonly IMapper _mapper;
         private readonly ICursosRepository _cursoRepository;
         private readonly IAulasRepository _aulasRepository;
@@ -27,13 +28,13 @@ namespace Cursos.Controllers
             _mapper = mapper;
         }
 
-        // GET: Cursos
+        [Authorize]
         public async Task<IActionResult> Manage()
         {
             return View(_cursoRepository.ObterTodos());
         }
 
-        // GET: Cursos/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
            
@@ -66,15 +67,13 @@ namespace Cursos.Controllers
             return View(cursoViewModel);
         }
 
-        // GET: Cursos/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Cursos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,thumbnail,nome,resumo,descricao,publicoAlvo,cargaHoraria")] Curso curso)
@@ -88,7 +87,7 @@ namespace Cursos.Controllers
             return View(curso);
         }
 
-        // GET: Cursos/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
@@ -104,9 +103,7 @@ namespace Cursos.Controllers
             return View(curso);
         }
 
-        // POST: Cursos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,thumbnail,nome,resumo,descricao,publicoAlvo,cargaHoraria")] Curso curso)
@@ -139,7 +136,7 @@ namespace Cursos.Controllers
             return View(curso);
         }
 
-        // GET: Cursos/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
@@ -156,7 +153,7 @@ namespace Cursos.Controllers
             return View(curso);
         }
 
-        // POST: Cursos/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
