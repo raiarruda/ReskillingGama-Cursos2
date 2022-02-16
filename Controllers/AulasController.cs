@@ -26,7 +26,7 @@ namespace Cursos.Controllers
         }
 
         // GET: Aulas
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Manage(int id)
         {
             if (id != null)
             {

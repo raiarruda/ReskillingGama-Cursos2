@@ -21,7 +21,7 @@ namespace Cursos.Controllers
         }
 
         // GET: PostagensBlog
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Manage()
         {
             return View(await _context.PostagemBlogs.OrderByDescending(p=>p.dataPublicacao).ToListAsync());
         }
@@ -175,5 +175,35 @@ namespace Cursos.Controllers
         {
             return _context.PostagemBlogs.Any(e => e.Id == id);
         }
+
+        //controller public 
+
+        public IActionResult Index()
+        {
+            List<PostagemBlog> postagens = _context.PostagemBlogs.OrderByDescending(c => c.dataPublicacao).ToList();
+
+
+            return View(postagens);
+        }
+
+        public async Task<IActionResult> Post(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var postagemBlog = await _context.PostagemBlogs
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (postagemBlog == null)
+            {
+                return NotFound();
+            }
+
+            return View(postagemBlog);
+        }
+
+
+
     }
 }

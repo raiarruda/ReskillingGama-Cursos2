@@ -1,42 +1,27 @@
 ﻿@model IEnumerable<Cursos.Models.Entidades.Curso>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cursos";
 }
 
-<h1>Index</h1>
+<h1>CURSOS</h1>
 
-<p>
-    <a class="btn btnbtn-outline-primary" asp-action="Create">Criar Curso</a>
-</p>
-
-
-
-<table class="table table-striped">
-    <thead class="thead-Plum">
-        <tr>
-
-            <th scope="col">Nome</th>
-            <th scope="col">Ações</th>
-        </tr>
-    </thead>
-    <tbody>
+<section>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-sm-1 g-4">
         @foreach (var item in Model)
         {
-
-            <tr>
-                <td>@item.nome</td>
-                <td>
-
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Visualizar</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Remover</a> |
-                <a asp-controller="Aulas" asp-action="Index" asp-route-id="@item.Id">Ver aulas de @item.Id</a>
-                </td>
-            </tr>
-
+        <div class="col">
+            <div class="card h-100">
+                <img src="@Html.DisplayFor(modelItem => item.thumbnail)" class="img-fluid rounded-start" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.nome)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.resumo)</p>
+                    <button class="btn btn-warning">
+                        <a class="" asp-action="CursosDetalhes" asp-route-id="@item.Id">Veja mais</a>
+                    </button>
+                </div>
+            </div>
+        </div>
         }
-
-    </tbody>
-</table>
-
+    </div>
+</section>

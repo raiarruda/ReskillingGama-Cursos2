@@ -21,37 +21,37 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
     
      <ul class="navbar-nav flex-grow-1">
+                @if (SignInManager.IsSignedIn(User))
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Administração
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/Cursos/Index">Gerenciar Cursos</a></li>
-                                <li><a class="dropdown-item" href="/Professores/Index">Gerenciar Professores</a></li>
-                                <li><a class="dropdown-item" href="/Aulas/Index">Gerenciar Aulas </a></li>
-                                 <li><a class="dropdown-item" href="/PostagensBlog/Index">Gerenciar Postagens </a></li>
+                                <li><a class="dropdown-item" href="/Cursos/Manage">Gerenciar Cursos</a></li>
+                                <li><a class="dropdown-item" href="/Professores/Manage">Gerenciar Professores</a></li>
+                                 <li><a class="dropdown-item" href="/PostagensBlog/Manage">Gerenciar Postagens </a></li>
                             </ul>
                         </li>
-
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Página Inicial</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CursosIndex">Cursos</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cursos" asp-action="Index">Cursos</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ProfessoresIndex">Professores</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Professores" asp-action="Index">Professores</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="BlogIndex">Blog</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PostagensBlog" asp-action="Index">Blog</a>
                         </li>
 
                     </ul>
 
-  <partial name="_LoginPartial" />
+                 <partial name="_LoginPartial" />
 
                 </div>
             </div>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Cursos.Models.Entidades.Curso>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn btnbtn-outline-primary" asp-action="Create">Criar Curso</a>
+</p>
+
+
+
+<table class="table table-striped">
+    <thead class="thead-Plum">
+        <tr>
+
+            <th scope="col">Nome</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@item.nome</td>
+                <td>
+
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Visualizar</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Remover</a> |
+                <a asp-controller="Aulas" asp-action="Manage" asp-route-id="@item.Id">Ver aulas de @item.Id</a>
+                </td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+

@@ -21,7 +21,7 @@ namespace Cursos.Controllers
         }
 
         // GET: Professores
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Manage()
         {
             return View(await _context.Professor.ToListAsync());
         }
@@ -144,5 +144,22 @@ namespace Cursos.Controllers
         {
             return _context.Professor.Any(e => e.Id == id);
         }
+
+
+        //controller publica 
+
+        public IActionResult Index()
+        {
+
+            List<Professor> professores = _context.Professor.OrderBy(c => c.nome).ToList();
+
+
+            return View(professores);
+
+        }
+
+
+
+
     }
 }

@@ -24,7 +24,7 @@ namespace Cursos.Controllers
         }
 
         // GET: Cursos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Manage()
         {
             return View(await _context.Curso.ToListAsync());
         }
@@ -168,5 +168,55 @@ namespace Cursos.Controllers
         {
             return _context.Curso.Any(e => e.Id == id);
         }
+
+
+        //controllers de páginas publicas 
+
+
+
+        public IActionResult Index()
+        {
+            List<Curso> cursos = _context.Curso.OrderBy(c => c.nome).ToList();
+
+
+            return View(cursos);
+        }
+
+        public async Task<IActionResult> CursosDetalhes(int? id)
+        {
+
+
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var curso = await _context.Curso.FirstOrDefaultAsync(m => m.Id == id);
+            CursoViewModel cursoViewModel = new CursoViewModel();
+            List<Aula> aulasCurso = _context.Aula.Where(c => c.cursoId == id).ToList();
+
+            if (curso == null)
+            {
+                return NotFound();
+            }
+
+            cursoViewModel.Id = curso.Id;
+            cursoViewModel.thumbnail = curso.thumbnail;
+            cursoViewModel.nome = curso.nome;
+            cursoViewModel.resumo = curso.resumo;
+            cursoViewModel.descricao = curso.descricao;
+            cursoViewModel.cargaHoraria = curso.cargaHoraria;
+            cursoViewModel.publicoAlvo = curso.publicoAlvo;
+            cursoViewModel.aulas = aulasCurso;
+
+
+            return View(cursoViewModel);
+        }
+
+
+
+
+
     }
 }

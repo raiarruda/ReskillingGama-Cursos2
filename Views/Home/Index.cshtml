@@ -6,7 +6,6 @@
 
 
 
-
 <header class="masthead">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -36,7 +35,7 @@
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.nome)</h5>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.resumo)</p>
                     <button class="btn btn-warning">
-                        <a class="" asp-action="CursosDetalhes" asp-route-id="@item.Id">Veja mais</a>
+                        <a class="" asp-controller="Cursos" asp-action="CursosDetalhes" asp-route-id="@item.Id">Veja mais</a>
                     </button>
                 </div>
             </div>
@@ -45,7 +44,7 @@
     </div>
 </section>
 
-<a asp-action="CursosIndex">Ver todos os cursos</a>
+<a asp-controller="Cursos" asp-action="Index">Ver todos os cursos</a>
 
 
 
@@ -65,7 +64,7 @@
                 <div class="card-body">
                     <h5 class="card-title">@item.tituloPost</h5>
                     <p class="card-text"> @item.conteudo</p>
-                    <a href="Home/BlogPostagem/@item.Id" class="btn btn-primary">Artigo Completo</a>
+                    <a  asp-controller="PostagensBlog" asp-action="Post"  asp-route-id="@item.Id" class="btn btn-primary">Artigo Completo</a>
                 </div>
             </div>
         </div>
