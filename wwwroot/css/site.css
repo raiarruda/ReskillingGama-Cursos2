@@ -1,20 +1,20 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 textarea {
@@ -22,6 +22,17 @@ textarea {
     height: 6rem;
 }
 
-.thead-Plum{
-    background-color: plum;
+
+/* CSS HEX */
+.blue1 {
+    background-color: #8094F0ff;
 }
+
+.blue2 {
+    background-color: #8D55FDff;
+}
+
+.lavender: {
+    background-color: #CFC8DEff;
+}
+

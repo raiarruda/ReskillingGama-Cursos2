@@ -4,13 +4,12 @@
     ViewData["Title"] = @Model.idCurso;
 }
 
-<h1>Index</h1>
-
+<h1>Gerenciar Aula</h1>
 <p>
     <a asp-action="Create" asp-route-id="@Model.idCurso">Cadastrar Aula do Curso @Model.idCurso</a>
 </p>
 <table class="table table-striped">
-    <thead class="thead-Plum"> 
+    <thead class="blue1"> 
         <tr>
             <th>
                 Ordem
@@ -42,8 +41,8 @@
                 @Html.DisplayFor(modelItem => item.curso.Id)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
