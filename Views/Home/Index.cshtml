@@ -23,6 +23,8 @@
     </div>
 </header>
 
+<hr class="hr3 ">
+
 <h1 class="fs-1 mt-4 mb-4 text-center">Conheça nossos CURSOS</h1>
 
 <section>
@@ -50,9 +52,9 @@
 </div>
 
 
+<hr class="hr3 ">
 
-
-<h1 class="fs-1 mt-4 mb-4">BLOG</h1>
+<h1 class="fs-1 mt-4 mb-4 text-center">BLOG</h1>
 
 
 
@@ -60,7 +62,7 @@
     @foreach (var item in Model.Postagens.Take(3))
     {
         <div class="col-sm-6">
-            <div class="card">
+            <div class="card shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                     <h5 class="card-title text-center">@item.tituloPost</h5>
                     <p class="card-text text-center"> @item.conteudo</p>
