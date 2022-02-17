@@ -7,59 +7,40 @@
 <h1>Details</h1>
 
 <div>
-    <h4>PostagemBlog</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.tituloPost)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.tituloPost)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.imagemCapa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.imagemCapa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.conteudo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.conteudo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.gostei)
-        </dt>
 
-        
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.gostei)
-        </dd>
+    <h2>@Model.tituloPost</h2>
+    <p> @Model.dataPublicacao por <strong>@Model.autor</strong></p>
+
+    <p> @Model.conteudo</p>
+    <div class="d-flex justify-content-evenly ">
+        <form class="col m-2" asp-action="Like">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-success">
+                @Model.gostei
+
+                <i class="fa-solid fa-thumbs-up"></i>
+            </button>
 
 
+        </form>
 
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.naoGostei)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.naoGostei)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.dataPublicacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.dataPublicacao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.autor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.autor)
-        </dd>
-    </dl>
+
+        <form class="col m-2" asp-action="Dislike">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">
+                @Model.naoGostei
+
+                <i class="fa-solid fa-thumbs-down"></i>
+            </button>
+
+        </form>
+
+    </div>
+
+
+
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+    <a asp-action="Index">Voltar</a>
 </div>
