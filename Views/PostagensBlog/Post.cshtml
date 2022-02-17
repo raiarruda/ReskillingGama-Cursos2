@@ -6,7 +6,7 @@
 
 
 <div class="align-content-center">
-    <img class="mx-auto" src="@Model.imagemCapa">
+    <img class="blog-img mx-auto" src="@Model.imagemCapa">
     <h1 class="display-1 text-uppercase text-center"> @Model.tituloPost</h1>
     <p> @Model.dataPublicacao por <strong>@Model.autor</strong></p>
   
@@ -14,30 +14,25 @@
     <p class="lead">@Model.conteudo</p>
 
 
-    <div class="d-flex justify-content-evenly ">
-        <form  class="d-inline" asp-action="Like">
+    <div class="d-flex justify-content-center mb-3">
+        <form  class="d-inline me-2" asp-action="Like">
             <input type="hidden" asp-for="Id" />
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-success btn-sm rounded">
                 @Model.gostei
 
                 <i class="fa-solid fa-thumbs-up"></i>
             </button>
-
-
         </form>
-
-
-        <form class="d-inline"  asp-action="Dislike">
-            <input type="hidden" asp-for="Id" />
-            <button type="submit" class="btn btn-danger">
+        <form class="d-inline ms-2"  asp-action="Dislike">
+            <input type="hidden" asp-for="Id" class=""/>
+            <button type="submit" class="btn btn-danger btn-sm rounded">
                 @Model.naoGostei
 
                 <i class="fa-solid fa-thumbs-down"></i>
             </button>
-
         </form>
-
     </div>
+
 
 
     <a class="btn btn-outline-primary  mx-auto d-block w-25 " asp-action="Index">Voltar</a>
