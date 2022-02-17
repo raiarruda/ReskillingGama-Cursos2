@@ -14,11 +14,12 @@
             <div class="card h-100">
                 <img src="@Html.DisplayFor(modelItem => item.thumbnail)" class="img-fluid rounded-start" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.nome)</h5>
-                    <p class="card-text">@Html.DisplayFor(modelItem => item.resumo)</p>
-                    <button class="btn btn-warning">
-                        <a class="" asp-action="CursosDetalhes" asp-route-id="@item.Id">Veja mais</a>
-                    </button>
+                    <h5 class="card-title text-center">@Html.DisplayFor(modelItem => item.nome)</h5>
+                    <p class="card-text text-center">@Html.DisplayFor(modelItem => item.resumo)</p>
+                    <div class="card-body text-center">
+                     <a asp-action="CursosDetalhes" asp-route-id="@item.Id" class="btn btn-warning">Veja mais</a>
+                    </div>
+
                 </div>
             </div>
         </div>

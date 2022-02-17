@@ -35,9 +35,9 @@
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.nome)</h5>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.resumo)</p>
-                    <button class="btn btn-warning">
-                        <a class="" asp-action="CursosDetalhes" asp-route-id="@item.Id">Veja mais</a>
-                    </button>
+                    <div class="card-body text-center">
+                     <a class="btn btn-warning" asp-action="CursosDetalhes" asp-route-id="@item.Id">Veja mais</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,9 +59,11 @@
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">@item.tituloPost</h5>
-                    <p class="card-text"> @item.conteudo</p>
-                    <a href="Home/BlogPostagem/@item.Id" class="btn btn-primary">Artigo Completo</a>
+                    <h5 class="card-title text-center">@item.tituloPost</h5>
+                    <p class="card-text text-center"> @item.conteudo</p>
+                    <div class="card-body text-center">
+                     <a href="Home/BlogPostagem/@item.Id" class="btn btn-primary">Artigo Completo</a>
+                    </div>
                 </div>
             </div>
         </div>
