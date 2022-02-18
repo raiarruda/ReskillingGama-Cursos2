@@ -10,8 +10,10 @@ namespace Cursos.Models.Entidades
         [DisplayName("Numero")]
         public int numeroOrdem { get; set; }
         [Display(Name ="Titulo")]
+        [StringLength(50, ErrorMessage = "Limite de 50 caracteres")]
         public string titulo { get; set; }
         [Display(Name ="Resumo")]
+        [StringLength(150, ErrorMessage = "Limite de 150 caracteres")]
         public string descricao { get; set; }
         [Display(Name ="Curso")]
         public int cursoId { get; set; }

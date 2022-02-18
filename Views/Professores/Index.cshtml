@@ -3,10 +3,36 @@
 @{
     ViewData["Title"] = "Professores";
 }
+<section">
+    <div>
+    <h1 class=text-center>PROFESSORES</h1>
+    </div>
+    <div class="row mt-2 row-cols-1 row-cols-md-3 row-cols-sm-1">
+        @foreach (var item in Model)
+        {
+            <div class="professor-card">
+                <div class="card-body shadow p-3 mb-5 rounded">
+                    <div class="mx-auto">
+                        <img src=" @Html.DisplayFor(modelItem => item.foto)" class="card-img professor-img" alt="...">
+                    </div>
+                    <div class="mb-3">
+                        <h5 class="card-title text-center">@Html.DisplayFor(modelItem => item.nome)</h5>
+                        <p class="card-text text">@Html.DisplayFor(modelItem => item.sobre)</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-2">
+                            <a href="@item.urlFacebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                        </div>
+                        <div class="col-2">
+                            <a href="@item.urlTwitter" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                        </div>
+                        <div class="col-2">
+                            <a href="@item.urlInstagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<h1>PROFESSORES</h1>
-
-@foreach(var item in Model)
-{
-    <h2>@item.nome</h2>
-}
+        }
+    </div>
+</section>

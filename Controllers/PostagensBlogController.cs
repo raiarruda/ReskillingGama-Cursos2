@@ -152,7 +152,7 @@ namespace Cursos.Controllers
 
             _postagemBlogRepository.Atualiza(postagemBlog);
             _postagemBlogRepository.Salvar();
-            return RedirectToAction(nameof(Details), new {@id = id});
+            return RedirectToAction(nameof(Post), new {@id = id});
         }
 
 
@@ -165,7 +165,7 @@ namespace Cursos.Controllers
 
             _postagemBlogRepository.Atualiza(postagemBlog);
             _postagemBlogRepository.Salvar();
-            return RedirectToAction(nameof(Details), new { @id = id });
+            return RedirectToAction(nameof(Post), new { @id = id });
         }
 
         private bool PostagemBlogExists(int id)

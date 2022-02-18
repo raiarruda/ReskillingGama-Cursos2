@@ -5,71 +5,35 @@
 }
 
 
-<section>
-    <div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <h5 class="card-title">@Model.nome)</h5>
-                    <p class="card-text">@Model.descricao</p>
 
-                </div>
-                <div class="col">
-                    <div class="row">
-                        <div class="col-1">
-                            <i class="fa-solid fa-user">R</i>
-                        </div>
-                        <div class="col">
-                            <h5 class="card-title">Resumo</h5>
-                            <p class="card-text">@Model.resumo)</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1">
-                            <i>PA</i>
-                        </div>
-                        <div class="col">
-                            <h5 class="card-title">Público-Alvo</h5>
-                            <p class="card-text">@Model.publicoAlvo)</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1">
-                            <i>CH</i>
-                        </div>
-                        <div class="col">
-                            <h5 class="card-title">cargaHoraria</h5>
-                            <p class="card-text">@Model.cargaHoraria)</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1">
-                            <i>F</i>
-                        </div>
-                        <div class="col">
-                            <h5 class="card-title">Formato</h5>
-                            <p class="card-text">Formato da Aula</p>
-                        </div>
-                    </div>
-                    @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
-                </div>
-            </div>
+
+<div class="p-5 mb-4 bg-light round-3" style="background: url(@Model.thumbnail);">
+    <div class="container-fluid py-5" >
+        <h1 class="display-5 fw-bold">@Model.nome</h1>
+        <p class="col-md-8 fs-4">@Model.resumo</p><a class="btn btn-primary btn-lg" role="button" href="#">Inscreva-se</a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-7">
+            <p class="lead"><br>@Model.descricao.<br><br></p>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4 d-lg-flex align-items-lg-center">
+            <ul class="list-group">
+                <li class="list-group-item"><i class="fas fa-users mr-3"></i><span></span><span> @Model.publicoAlvo</span></li>
+                <li class="list-group-item"><i class="fas fa-stopwatch mr-3"></i><span>@Model.cargaHoraria</span></li>
+            </ul>
         </div>
     </div>
-    <div class="card-body">
-        <h5 class="card-title">Programação</h5>
-        @foreach (var item in Model.aulas)
+</div>
+<div class="container">
+    <h1 class="mb-4 mt-4">Programação</h1>
+    <ul class="list-group" >
+        @foreach(var item in Model.aulas)
         {
-            <div class="row">
-                <div class="col-1">
-                    <i>P</i>
-                </div>
-                <div class="col">
-                    <h5 class="card-title">@item.numeroOrdem. @item.titulo </h5>
-                    <p class="card-text">@item.numeroOrdem. @item.titulo</p>
-                </div>
-            </div>
+            <li class="list-group-item"><span>@item.titulo</span></li>
         }
-        @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
-    </div>
-</section>
+        
+        
+    </ul>
+</div>

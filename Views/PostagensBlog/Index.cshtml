@@ -1,39 +1,34 @@
 ﻿@model IEnumerable<Cursos.Models.Entidades.PostagemBlog>
 
 @{
-    
+
     ViewData["Title"] = "Blog";
 }
 
-<h1>
+<div>
+    <h1 class="text-center">
     BLOG
-</h1>
+    </h1>
+
+</div>
+
 
 <div id="main-content" class="blog-page">
     <div class="container">
         <div class="row clearfix">
             @foreach (var item in Model)
             {
-                <div class="col-lg-8 col-md-12 left-box">
-                    <div class="card single_post">
-                        <div class="body">
-                            <div class="img-post">
-                                <img class="d-block img-fluid" src="@Html.DisplayFor(modelItem => item.imagemCapa)" alt="First slide">
-                            </div>
-                            <h3><a href="blog-details.html">@Html.DisplayFor(modelItem => item.tituloPost)</a></h3>
-                            <p> @Html.DisplayFor(modelItem => item.conteudo)</p>
-                        </div>
-                        <div class="footer">
-                            <div class="actions">
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary">Detalhes</a>
-                            </div>
-                            <ul class="stats">
-                                <li><a  class="fa fa-heart">28</a></li>
-                                <li><a  class="fa fa-comment">128</a></li>
-                            </ul>
-                        </div>
-                    </div>
+
+                <div class="col-md-4 col-lg-3 offset-lg-0 d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                    <img class="rounded-circle" src="@item.imagemCapa" width="200" height="200" /></div>
+                <div class="col-12 col-md-8 col-lg-7">
+                    <h2>@item.tituloPost</h2>
+                    <p style="padding-top: 4px;padding-bottom: 4px;">
+                       @item.conteudo
+                    </p>
+                        <a class="d-lg-flex justify-content-lg-end" asp-controller="PostagensBlog" asp-action="Post" asp-route-id="@item.Id"> Leia mais  </a>
                 </div>
+
             }
         </div>
     </div>

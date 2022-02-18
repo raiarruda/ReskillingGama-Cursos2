@@ -1,65 +1,41 @@
 ﻿@model Cursos.Models.Entidades.PostagemBlog
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Postagem";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>PostagemBlog</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.tituloPost)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.tituloPost)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.imagemCapa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.imagemCapa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.conteudo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.conteudo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.gostei)
-        </dt>
+<div class="align-content-center">
+    <img class="d-block mx-auto" src="@Model.imagemCapa">
+    <h1 class="display-1 text-uppercase text-center"> @Model.tituloPost</h1>
+    <p> @Model.dataPublicacao por <strong>@Model.autor</strong></p>
+  
+    
+    <p class="lead">@Model.conteudo</p>
 
-        
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.gostei)
-        </dd>
+
+    <div class="d-flex justify-content-center mb-3">
+        <form  class="d-inline me-2" asp-action="Like">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-success btn-sm rounded">
+                @Model.gostei
+
+                <i class="fa-solid fa-thumbs-up"></i>
+            </button>
+        </form>
+        <form class="d-inline ms-2"  asp-action="Dislike">
+            <input type="hidden" asp-for="Id" class=""/>
+            <button type="submit" class="btn btn-danger btn-sm rounded">
+                @Model.naoGostei
+
+                <i class="fa-solid fa-thumbs-down"></i>
+            </button>
+        </form>
+    </div>
 
 
 
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.naoGostei)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.naoGostei)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.dataPublicacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.dataPublicacao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.autor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.autor)
-        </dd>
-    </dl>
+    <a class="btn btn-outline-primary  mx-auto d-block w-25 " asp-action="Index">Voltar</a>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+

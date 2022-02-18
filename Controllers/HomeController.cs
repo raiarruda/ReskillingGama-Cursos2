@@ -7,18 +7,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebApplication2.Data;
+using WebApplication2.Dominio.Interfaces;
 using WebApplication2.Models;
 
 namespace Cursos.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICursosRepository _cursosRepository;
+        private readonly IPostagensBlogRepository _postagemBlogRepository;
         private readonly IMapper _mapper;
 
-        public HomeController(ApplicationDbContext context, IMapper mapper)
+        public HomeController(IMapper mapper, ICursosRepository cursosRepository, IPostagensBlogRepository postagemBlogRepository)
         {
-            _context = context;
+            _cursosRepository = cursosRepository;
+            _postagemBlogRepository = postagemBlogRepository;
             _mapper = mapper;
         }
 
@@ -26,8 +29,8 @@ namespace Cursos.Controllers
         {
             HomeViewModel homeViewModel = new HomeViewModel();
 
-            List<Curso> cursos = _context.Curso.ToList();
-            List<PostagemBlog> postagens = _context.PostagemBlogs.OrderByDescending(p => p.dataPublicacao).ToList();
+            List<Curso> cursos = _cursosRepository.ObterTodos();
+            List<PostagemBlog> postagens = _postagemBlogRepository.ObterTodos();
 
             homeViewModel.Cursos = _mapper.Map<List<CursoViewModel>>(cursos);
             homeViewModel.Postagens = _mapper.Map<List<PostagemBlogViewModel>>(postagens);
