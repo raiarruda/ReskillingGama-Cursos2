@@ -3,22 +3,25 @@
 @{
     ViewData["Title"] = "Cursos";
 }
+<div>
+    <h1 class="text-center">CURSOS</h1>
+</div>
 
-<h1>CURSOS</h1>
 
 <section>
     <div class="row row-cols-1 row-cols-md-3 row-cols-sm-1 g-4">
         @foreach (var item in Model)
         {
         <div class="col">
-            <div class="card h-100">
-                <img src="@item.thumbnail)" class="img-fluid rounded-start" alt="...">
+            <div class="card h-100 shadow p-3 mb-5 bg-white rounded">
+                <img src="@Html.DisplayFor(modelItem => item.thumbnail)" class="img-fluid rounded-start" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">@item.nome)</h5>
-                    <p class="card-text">@item.resumo)</p>
-                    <button class="btn btn-warning">
-                        <a class="" asp-action="CursosDetalhes" asp-route-id="@item.Id">Veja mais</a>
-                    </button>
+                    <h5 class="card-title text-center">@Html.DisplayFor(modelItem => item.nome)</h5>
+                    <p class="card-text text-center">@Html.DisplayFor(modelItem => item.resumo)</p>
+                    <div class="card-body text-center">
+                     <a asp-action="CursosDetalhes" asp-route-id="@item.Id" class="btn btn-warning">Veja mais</a>
+                    </div>
+
                 </div>
             </div>
         </div>

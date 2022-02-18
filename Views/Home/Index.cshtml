@@ -23,58 +23,59 @@
 </header>
 
 
+<hr class="hr3 ">
 
-<h1 class="fs-1 mt-4 mb-4">Conheça nossos CURSOS</h1>
+<h1 class="fs-1 mt-4 mb-4 text-center">Conheça nossos CURSOS</h1>
 
 <section>
     <div class="row row-cols-1 row-cols-md-3 row-cols-sm-1 g-4">
         @foreach (var item in Model.Cursos.Take(3))
         {
-            <div class="col">
-                <div class="card h-100">
-                    <img src="@item.thumbnail" class="img-fluid rounded-start" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.nome</h5>
-                        <p class="card-text">@item.resumo</p>
-                        <button class="btn btn-warning">
-                            <a class="" asp-controller="Cursos" asp-action="CursosDetalhes" asp-route-id="@item.Id">Veja mais</a>
-                        </button>
+        <div class="col">
+            <div class="card h-100 shadow p-3 mb-2 rounded">
+                <img src="@Html.DisplayFor(modelItem => item.thumbnail)" class="img-fluid rounded-start" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-center">@Html.DisplayFor(modelItem => item.nome)</h5>
+                    <p class="card-text text-center">@Html.DisplayFor(modelItem => item.resumo)</p>
+                    <div class="card-body text-center">
+                     <a class="btn btn-warning" asp-action="CursosDetalhes" asp-route-id="@item.Id">Veja mais</a>
                     </div>
                 </div>
             </div>
+        </div>
         }
     </div>
 </section>
-//TODO: centralizar
-<a asp-controller="Cursos" asp-action="Index">Ver todos os cursos</a>
+
+<div class=" mt-4 mb-4 text-center ">
+    <a class="btn btn-warning shadow p-3 mb-5 rounded" asp-action="CursosIndex">Ver todos os cursos</a>
+</div>
+
+
+<hr class="hr3 ">
+
+<h1 class="fs-1 mt-4 mb-4 text-center">BLOG</h1>
 
 
 
-
-
-<h1 class="fs-1 mt-4 mb-4">Veja as ultimas publicações do nosso Blog</h1>
-
-
-
-
-
-<section class="row">
+<div class="row row-cols-1 row-cols-md-3 row-cols-sm-1 g-4">
     @foreach (var item in Model.Postagens.Take(3))
-
     {
-
-        <div class="col-md-4 col-lg-3 offset-lg-0 d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
-            <img class="rounded-circle" src="@item.imagemCapa" width="200" height="200" />
+        <div class="col-sm-6">
+            <div class="card shadow p-3 mb-5 rounded">
+                <div class="card-body">
+                    <h5 class="card-title text-center">@item.tituloPost</h5>
+                    <p class="card-text text-center"> @item.conteudo</p>
+                    <div class="card-body text-center">
+                     <a href="Home/BlogPostagem/@item.Id" class="btn btn-primary">Artigo Completo</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-8 col-lg-7">
-            <h2>@item.tituloPost</h2>
-            <p style="padding-top: 4px;padding-bottom: 4px;">
-                @item.conteudo
-            </p>
-            <a class="d-lg-flex justify-content-lg-end" asp-controller="PostagensBlog" asp-action="Post" asp-route-id="@item.Id"> Leia mais  </a>
-        </div>
-
     }
-</section>
-//TODO: centralizar
-<a asp-controller="PostagensBlog" asp-action="Index">Ver todas as postagens </a>
+</div>
+<div class=" mt-3 text-center ">
+    <a class="btn btn-primary shadow p-3 mb-5 rounded" asp-controller="PostagensBlog" asp-action="Index">Ver todas as postagens </a>
+</div>
+
+

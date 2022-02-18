@@ -619,9 +619,14 @@ progress {
         content: "— ";
     }
 
-.img-fluid {
+.img {
     max-width: 100%;
-    height: auto;
+    max-height: 100%;
+}
+
+.img-fluid {
+    height: 200px;
+    width: auto;
 }
 
 .img-logo {
@@ -3123,7 +3128,7 @@ textarea.form-control-lg {
     border: 1px solid transparent;
     padding: 1rem 1.75rem;
     font-size: 0.875rem;
-    border-radius: 0;
+    border-radius: 15;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -4871,6 +4876,26 @@ textarea.form-control-lg {
 
 .card-title {
     margin-bottom: 0.5rem;
+}
+
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px; /* fallback */
+    max-height: 32px; /* fallback */
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.card-text-8linhas {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 16px; /* fallback */
+    max-height: 32px; /* fallback */
+    -webkit-line-clamp: 8; /* number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 .card-subtitle {
