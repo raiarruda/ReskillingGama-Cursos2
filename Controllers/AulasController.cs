@@ -33,7 +33,7 @@ namespace Cursos.Controllers
             if (id != null)
             {
                 var aulasPorCurso = new AulaViewModel();
-                //      var context = _context.Aula.Include(a => a.curso).Where(a => a.cursoId == id).ToList();
+
                  
                 aulasPorCurso.Aulas = _aulasRepository.ObterPorCurso(id);
                 aulasPorCurso.idCurso = id;
@@ -87,7 +87,7 @@ namespace Cursos.Controllers
             {
                 _aulasRepository.CriarNovo(aula);
                 _aulasRepository.Salvar();
-                return RedirectToAction(nameof(Index), new {id=aula.cursoId});
+                return RedirectToAction(nameof(Manage), new {id=aula.cursoId});
             }
          
             return View(aula);
@@ -137,7 +137,7 @@ namespace Cursos.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Manage), new { id = aula.cursoId });
             }
     
             return View(aula);
@@ -168,7 +168,7 @@ namespace Cursos.Controllers
             var aula = _aulasRepository.ObterPorId(id);
             _aulasRepository.Deleta(aula);
             _aulasRepository.Salvar();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Manage), new { id = aula.cursoId });
         }
 
         private bool AulaExists(int id)
