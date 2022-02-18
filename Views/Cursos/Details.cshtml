@@ -1,45 +1,45 @@
 ﻿@model Cursos.Models.ViewModels.CursoViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do curso";
 }
 
 
-<div class="list-group">
-  <h6 href="#" class="list-group-item list-group-item-action">@Model.nome</h6>
 
-  <li  class="list-group-item list-group-item-action list-group-item-primary">
-     Publico-alvo: @Model.publicoAlvo;
-  </li>
-  <li class="list-group-item list-group-item-action list-group-item-secondary">
-      Carga Horaria:  @Model.cargaHoraria</li>
-  <li class="list-group-item list-group-item-action list-group-item-success">
-      Descrição : @Model.descricao
-    
-  </li>
-  
+
+<div class="p-5 mb-4 bg-light round-3" style="background: url(@Model.thumbnail);">
+    <div class="container-fluid py-5" >
+        <h1 class="display-5 fw-bold text-over-img">@Model.nome</h1>
+        <p class="col-md-8 fs-4 text-over-img ">@Model.resumo</p><a class="btn btn-primary btn-lg" role="button" href="#">Inscreva-se</a>
+    </div>
 </div>
-
-
-
-<section>
-    <h4>Veja como o curso está divido</h4>
-
-     <ul class="list-group">
-    @foreach (var item in Model.aulas)
-    {
-
-       
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">@item.titulo</div>
-                    @item.descricao
-                </div>
-                <span class="badge bg-primary rounded-pill">@item.numeroOrdem</span>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-7">
+            <p class="lead"><br>@Model.descricao.<br><br></p>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4 d-lg-flex align-items-lg-center">
+            <ul class="list-group">
+                <li class="list-group-item"><i class="fas fa-users mr-3"></i><strong> Público Alvo: </strong><span> @Model.publicoAlvo</span></li>
+                <li class="list-group-item"><i class="fas fa-stopwatch mr-3"></i><strong> Carga Horária: </strong><span>@Model.cargaHoraria</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1 class="mb-4 mt-4">Programação</h1>
+    <ul class="list-group" >
+        @foreach(var item in Model.aulas)
+        {
+            <li class="list-group-item">
+                <span class="badge bg-secondary">@item.numeroOrdem</span>
+                <span class="fw-bold"> @item.titulo</span>
+                <p>@item.descricao</p>
+                
+            
             </li>
-           
-
-    }
-
+        }
+        
+        
     </ul>
-</section>
+</div>

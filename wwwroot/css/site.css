@@ -59,3 +59,7 @@ textarea {
     margin-left: auto;
     margin-bottom: 30px;
 }
+
+.text-over-img {
+    text-shadow: 0 0 2px #fff;
+}

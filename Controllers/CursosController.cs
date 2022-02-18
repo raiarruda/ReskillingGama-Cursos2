@@ -34,7 +34,7 @@ namespace Cursos.Controllers
             return View(_cursoRepository.ObterTodos());
         }
 
-        [Authorize]
+      
         public async Task<IActionResult> Details(int id)
         {
            
